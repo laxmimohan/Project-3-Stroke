@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Are you at risk for a stroke?</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body>
+
+    <!-- Create Bootstrap container -->
+    <div class="container">
+
+        <!-- New Bootstram row -->
+        <div class="row">
+
+            <!-- Bootstrap row 1 column 1 -->
+            <div class="col-md-6">
+    <h1>Enter your details to see whether you are at risk of having a stroke.</h1>
+    <hr>
+
+    <!-- Create form -->
+    <form id="stroke_form" action="/api/predict" method="get" target="blank">
+        <fieldset>
+
+        <!-- Numerical input fields -->
+            <h4>Please enter a number in the following fields.</h4>
+            <input type="text" name="age" id="age"> &nbsp; Age <br>
+            <input type="text" name="agl" id="agl"> &nbsp; Average Glucose Level <br>
+            <!-- <input type="text" name="bmi" id="bmi"> &nbsp; BMI <br> -->
+
+        <!-- Drop-down option fileds -->
+            <h4>Please select the drop-down option that is most relevant to your work type.</h4>
+            <select id="work_type" name="work_type">  Work type 
+                <option value="self_employed">Self employed</option>
+                <option value="employer_employed">Employer employed</option>
+                <option value="children">Child</option>
+            </select>
+
+            <!-- In our initial data analysis,  -->
+            <!-- We noticed trends in smoking_status -->
+            <!-- that do not reflect statements made in a scientific journal -->
+            <!-- on the effects of smoking on having a stroke -->
+            <!-- We therefore opted not to use smoking_status as a feature -->
+            <!-- We leave a drop-down option commented out here -->
+            <!-- So that we may return at a later time if we decide to use this in some way -->
+            
+            <select id="smoking_status" name="smoking_status"> Smoking status 
+                <option value="smokes">Smokes</option>
+                <option value="formerly_smoked">Formerly smoked</option>
+                <option value="never_smoked">Never smoked</option>
+
+                <!-- <option value="currently_smokes"> Doesn't Currently Smoke</option>
+                <option value="doesnt_currently_smoke"> Currently Smokes</option> -->
+
+            </select>
+
+            <!-- Checkbox fields -->
+            <h4>Please check the box if any of the following applies to you</h4>
+            <input id="has_hypertension" type="checkbox" name="hypertension"> Has Hypertension <br>
+            <input id="has_heart_disease" type="checkbox" name="heart_disease"> Has Heart Disease <br>
+            <input id="ever_married" type="checkbox"name="ever_married"> Ever married <br>
+
+        <br>
+
+        <!-- Submit button -->
+         <button>
+             <input type="submit" value="Get results">
+         </button>
+    
+         </fieldset>
+    </form>
+
+    <!-- End of Bootstrap row 1 column 1 -->
+    </div>
+
+    <!-- Bootstrap row 1 column 2 -->
+    <div class="col-md-6">
+
+    <!-- Creaate h1 element in which JavaScript will write prediction -->
+    <h1 id="user_message"></h1>
+
+    <!-- End of Bootstrap row 1 column 2 -->
+    </div>
+
+    <!-- End of Bootstrap row 1 -->
+    </div>
+
+    <!-- End of Bootsrap container -->
+    </div>
+
+    <!-- Link to JavaScript file -->
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+</body>
+</html>
